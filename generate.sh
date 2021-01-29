@@ -5,7 +5,6 @@ cd "$1" || exit 1
 
 BASE=$(pwd)
 
-#touch CONTRIBUTORS
 touch MAINTAINERS.md
 touch LICENSE
 touch Makefile
@@ -58,6 +57,9 @@ cat <<EOF > .gitignore
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Not the executables
+bin/
+
 # Dependency directories
 vendor/
 EOF
@@ -68,6 +70,14 @@ mkdir examples/
 # binaries of the application. one to many.
 mkdir cmd/
 touch cmd/README.md
+
+# bin directory
+mkdir bin/
+touch bin/README.md
+
+#
+mkdir pkg/
+touch pkg/README.md
 
 # business logic. reusable between binaries. files to organize
 # cannot import from cmd
@@ -85,10 +95,39 @@ touch vendors/README.md
 mkdir scripts/
 touch scripts/README.md
 
+mkdir cmd/main
+touch cmd/main/main.go
+cat <<EOF > cmd/main/main.go
+package main
+
+import "fmt"
+
+func main(){
+	fmt.Println("success")
+}
+EOF
+
 # Initialize go mod
 cd "$BASE"
-cd cmd || exit 0
-go mod init
+#cd cmd || exit 0
+#go mod init
+cat <<EOF > go.mod
+module github.com/YOUR-USER-OR-ORG-NAME/YOUR-REPO-NAME
+
+go 1.15
+EOF
+
+go build -o ./bin/main ./cmd/main
+./bin/main
+
+# Init the repo
+git init
+git add .
+git commit -m 'First commit'
 
 # Initialize pre-commit hooks
 pre-commit install
+
+
+echo "============="
+echo "- Change the go mod with your repo"
