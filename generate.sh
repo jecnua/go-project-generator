@@ -5,6 +5,7 @@ cd "$1" || exit 1
 
 BASE=$(pwd)
 
+touch CHANGELOG.md
 touch MAINTAINERS.md
 touch LICENSE
 touch Makefile
@@ -14,6 +15,7 @@ cat <<EOF > README.md
 
 [![Actions Status]()]()
 ![](https://img.shields.io/maintenance/yes/2021.svg)
+![golang](https://img.shields.io/badge/golang-1.15-green.svg)
 
 ## Maintainers
 
