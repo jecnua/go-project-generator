@@ -12,10 +12,16 @@ Other external projects like this:
 
 ## Requirements
 
-- go
-- golint
+- go 1.15
+- [golint](https://github.com/golang/lint)
+
+## Usage
+
+Clone the repo and then:
+
+    ./go-project-generator/generate.sh my-project
 
 ## TODO
 
 - Add github action
-- 
+- Fail if golint is not installed
