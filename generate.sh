@@ -8,7 +8,15 @@ BASE=$(pwd)
 touch CHANGELOG.md
 touch MAINTAINERS.md
 touch LICENSE
-touch Makefile
+
+cat <<EOF > Makefile
+build:
+	go build -o ./bin/scan ./cmd/main/
+
+run:
+	go build -o ./bin/scan ./cmd/main/
+	./bin/scan
+EOF
 
 cat <<EOF > README.md
 #
