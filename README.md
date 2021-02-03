@@ -25,3 +25,4 @@ Clone the repo and then:
 
 - Add github action
 - Fail if golint is not installed
+- Add example of tracing

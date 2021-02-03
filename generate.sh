@@ -16,6 +16,31 @@ build:
 run:
 	go build -o ./bin/scan ./cmd/main/
 	./bin/scan
+
+# Profiles
+
+generate-profiles:
+	go test ./cmd/main -cpuprofile cpu.prof -memprofile mem.prof -bench .
+
+mem-profile: generate-profiles
+	# Type: alloc_space
+	go tool pprof mem.prof
+
+cpu-profile: generate-profiles
+	# Type: cpu
+	go tool pprof cpu.prof
+
+# Coverage
+
+coverage:
+	go test ./cmd/main -coverprofile=coverage.out -coverpkg=./...
+
+coverage-html: coverage
+	go tool cover -html=coverage.out
+
+coverage-func: coverage
+	go tool cover -func=coverage.out
+
 EOF
 
 cat <<EOF > README.md
@@ -115,6 +140,33 @@ import "fmt"
 func main(){
 	fmt.Println("success")
 }
+
+func example(x int) int {
+	y := x+2
+	return y
+}
+EOF
+
+cat <<EOF > cmd/main/main_test.go
+package main
+
+import (
+	"os"
+	"testing"
+)
+
+func TestMain(m *testing.M) {
+	exitVal := m.Run()
+	os.Exit(exitVal)
+}
+
+func TestExample(t *testing.T){
+	got := example(3)
+	want := 5
+	if got != want {
+		t.Errorf("got %d want %d", got, want)
+	}
+}
 EOF
 
 # Initialize go mod
@@ -131,12 +183,12 @@ go build -o ./bin/main ./cmd/main
 ./bin/main
 
 # Init the repo
-git init
-git add .
-git commit -m 'First commit'
+#git init
+#git add .
+#git commit -m 'First commit'
 
 # Initialize pre-commit hooks
-pre-commit install
+#pre-commit install
 
 
 echo "============="
