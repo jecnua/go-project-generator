@@ -20,7 +20,10 @@ run:
 # Profiles
 
 generate-profiles:
-	go test ./cmd/main -cpuprofile cpu.prof -memprofile mem.prof -bench .
+	go test ./cmd/main \
+		-cpuprofile cpu.prof \
+		-memprofile mem.prof \
+		-bench .
 
 mem-profile: generate-profiles
 	# Type: alloc_space
@@ -40,6 +43,12 @@ coverage-html: coverage
 
 coverage-func: coverage
 	go tool cover -func=coverage.out
+
+# Tracing
+
+traces:
+	go test ./cmd/main -trace trace.out
+	go tool trace pkg.test trace.out
 
 EOF
 
@@ -135,9 +144,16 @@ touch cmd/main/main.go
 cat <<EOF > cmd/main/main.go
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main(){
+	ch := make(chan int)
+	go func() {
+		ch <- 123
+	}()
+	<-ch
 	fmt.Println("success")
 }
 
