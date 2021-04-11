@@ -24,5 +24,6 @@ Clone the repo and then:
 ## TODO
 
 - Add github action
-- Fail if golint is not installed
-- Add example of tracing
+- Fail if golint is not installed, or profile
+-- go get github.com/pkg/profile
+- brew install graphviz
