@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![](https://img.shields.io/maintenance/yes/2021.svg)
-![golang](https://img.shields.io/badge/golang-1.15-green.svg)
+![golang](https://img.shields.io/badge/golang-1.16-green.svg)
 
 - https://github.com/golang-standards/project-layout
 
@@ -12,7 +12,7 @@ Other external projects like this:
 
 ## Requirements
 
-- go 1.15
+- go 1.16
 - [golint](https://github.com/golang/lint)
 
 ## Usage

@@ -57,7 +57,7 @@ cat <<EOF > README.md
 
 [![Actions Status]()]()
 ![](https://img.shields.io/maintenance/yes/2021.svg)
-![golang](https://img.shields.io/badge/golang-1.15-green.svg)
+![golang](https://img.shields.io/badge/golang-1.16-green.svg)
 
 ## Maintainers
 
@@ -192,7 +192,7 @@ cd "$BASE"
 cat <<EOF > go.mod
 module github.com/YOUR-USER-OR-ORG-NAME/YOUR-REPO-NAME
 
-go 1.15
+go 1.16
 EOF
 
 go build -o ./bin/main ./cmd/main
@@ -208,4 +208,14 @@ go build -o ./bin/main ./cmd/main
 
 
 echo "============="
-echo "- Change the go mod with your repo"
+echo <<EOF
+Now remember to:
+
+- Change the go.mod file with your repo name and org
+- Init the git repo
+- Enable precommit hooks
+
+pre-commit autoupdate
+pre-commit install
+
+EOF
