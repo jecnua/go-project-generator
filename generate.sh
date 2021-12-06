@@ -17,6 +17,9 @@ run:
 	go build -o ./bin/scan ./cmd/main/
 	./bin/scan
 
+tests:
+	go test -v ./cmd/main/
+
 # Profiles
 
 generate-profiles:
@@ -70,8 +73,7 @@ repos:
     rev: master
     hooks:
       - id: go-fmt
-#      - id: go-vet
-      - id: go-lint
+      - id: go-vet
 #      - id: go-imports
 #      - id: go-cyclo
 #        args: [-over=15]
@@ -100,6 +102,9 @@ cat <<EOF > .gitignore
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+#
+go.sum
 
 # Not the executables
 bin/

@@ -13,7 +13,6 @@ Other external projects like this:
 ## Requirements
 
 - go 1.16
-- [golint](https://github.com/golang/lint)
 
 ## Usage
 
@@ -24,6 +23,5 @@ Clone the repo and then:
 ## TODO
 
 - Add github action
-- Fail if golint is not installed, or profile
 -- go get github.com/pkg/profile
 - brew install graphviz
